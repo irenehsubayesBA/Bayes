@@ -20,4 +20,5 @@ In the individual project, the dataset I chose is from the following link: https
 And the tool I used to answer the business problems I found from the dataset were python (matplotlib) and **Tableau**.
 
 ```Data viz_individual project.ipynb```: I plotted a graph by using matplotlib to identify the pizza's price distribution.
+
 ```Data viz_individual project_report.docx```: is the final report contaning insights gained from the visuals.
