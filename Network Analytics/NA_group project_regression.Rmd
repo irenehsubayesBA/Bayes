@@ -1,0 +1,97 @@
+---
+title: "RENA"
+author: "Irene Hsu"
+date: "2022-11-15"
+output: pdf_document
+---
+
+```{r}
+L <-read.csv(file = "glmregression.csv", header = TRUE)
+L
+```
+
+
+```{r}
+L1 <- glm(L$patent_application ~ L$ti_exp + L$tenure + L$closenesscentrality + L$eigenvectorcentrality + L$clusteringeffects + L$betweenesscentrality, data = L, family = "binomial")
+summary(L1)
+```
+
+```{r}
+L2 <- glm(L$patent_application ~ L$ti_exp + L$tenure + L$eigenvectorcentrality + L$clusteringeffects + L$betweenesscentrality, data = L, family = "binomial")
+
+summary(L2)
+```
+```{r}
+plot(L$eigenvectorcentrality,L$clusteringeffects)
+```
+```{r}
+plot(L$eigenvectorcentrality,L$betweenesscentrality)
+
+```
+
+```{r}
+L3 <- glm(L$patent_application ~ L$ti_exp + L$eigenvectorcentrality + L$clusteringeffects + L$betweenesscentrality, data = L, family = "binomial")
+
+summary(L3)
+```
+
+```{r}
+L4 <- glm(L$patent_application ~ L$betweenesscentrality, data = L, family = "binomial")
+
+summary(L4)
+```
+
+```{r}
+L5 <- glm(L$patent_application ~ L$eigenvectorcentrality + L$clusteringeffects + L$betweenesscentrality, data = L, family = "binomial")
+
+summary(L5)
+```
+
+```{r}
+plot(L$clusteringeffects,L$betweenesscentrality)
+```
+
+```{r}
+plot(L$eigenvectorcentrality,L$betweenesscentrality)
+```
+
+```{r}
+plot(L$eigenvectorcentrality,L$clusteringeffects)
+```
+
+```{r}
+L6 <- glm(L$patent_application ~ L$clusteringeffects + L$betweenesscentrality, data = L, family = "binomial")
+
+summary(L6)
+```
+
+```{r}
+L7 <- glm(L$patent_application ~ L$clusteringeffects, data = L, family = "binomial")
+
+summary(L7)
+```
+
+```{r}
+L8 <- glm(L$patent_application ~ L$eigenvectorcentrality, data = L, family = "binomial")
+
+summary(L8)
+```
+```{r}
+L1
+```
+
+```{r}
+# Backward selection
+backwards = step(L1)
+```
+
+
+```{r}
+exp(coef(L1))
+```
+
+```{r}
+hl_gof <- hoslem.test(L$patent_application, fitted(L1), g = 10)
+hl_gof
+```
+
