@@ -12,7 +12,7 @@ Firstly, the goal of group project is to create a set of visuals to address the 
 
 5. Are there areas of the company where pay is not equitable?
 
-```Data viz_group project.ipynb``` & ```Data viz_group project_2.ipynb```: I plotted four graphs by using matplotlib to help us answer the fifth question and second question, and the insights we gained from the graphs could be found in ``````.
+```Data viz_group project.ipynb``` & ```Data viz_group project_2.ipynb```: I plotted four graphs by using matplotlib to help us answer the fifth question and second question, and the insights we gained from the graphs could be found in ```Data viz_group project_report.pdf```.
 
 Secondly, the goal of individual project is to identify a dataset of interest and perform an exploratory analysis to better understand the shape and structure of the data, investigate initial questions, and develop preliminary insights & hypotheses. The final report comprises captioned visualizations that convey key insights gained during the analysis.
 
