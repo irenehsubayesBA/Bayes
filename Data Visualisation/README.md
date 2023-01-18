@@ -1,5 +1,7 @@
 In Data Visualisation course, students were assgined to complete two projects in term 1 (group project and individual project).
 
+----------------------
+
 Firstly, the goal of group project is to create a set of visuals to address the following business problems:
 
 1. How do employees’ performance scores change within and across managers?
