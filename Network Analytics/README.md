@@ -2,7 +2,9 @@ In Network Analtics course, students were assgined to complete two projects in t
 
 ------------------
 
-Firstly, the goal of group project is to provide actionable insights on how to improve the performance of R&D projects by assembling the right team of engineers.
+***Group Project***
+
+The goal of group project is to provide actionable insights on how to improve the performance of R&D projects by assembling the right team of engineers.
 
 ```NA_group project.ipynb```: 
 
@@ -13,3 +15,7 @@ Firstly, the goal of group project is to provide actionable insights on how to i
 1. Perform glm regression to identify which network measures have impact on getting patent.
 
 -------------------
+
+***Individual Project***
+
+```NA_individual report.pdf```
