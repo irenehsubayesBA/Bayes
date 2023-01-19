@@ -1,4 +1,4 @@
-# About the courses
+# Courses
 
 ***Term 1***
 
