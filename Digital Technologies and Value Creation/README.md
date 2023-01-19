@@ -26,4 +26,4 @@ The goal of individual project (case study) is to develop a restructuring strate
 3. Developed CAR model to categorized employees who may accept RCCs or may not accept RCCs.
 4. Performed PCA to reduce the number of variables of the data set.
 
-```DTVC_individual report.pdf```: is the final report contaning insights gained from analysis.
+```DTVC_individual report.pdf```: is the final report contaning insights gained from analysis. (the optimazation model mentioned in the report could not be uploaded in public due to the publication right)
