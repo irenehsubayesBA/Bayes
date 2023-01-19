@@ -2,7 +2,9 @@ In Data Visualisation course, students were assgined to complete two projects in
 
 ----------------------
 
-Firstly, the goal of group project is to create a set of visuals to address the following business problems:
+***Group Project***
+
+The goal of group project is to create a set of visuals to address the following business problems:
 
 1. How do employees’ performance scores change within and across managers?
 
@@ -19,7 +21,9 @@ Firstly, the goal of group project is to create a set of visuals to address the 
 
 -----------------------
 
-Secondly, the goal of individual project is to identify a dataset of interest and perform an exploratory analysis to better understand the shape and structure of the data, investigate initial questions, and develop preliminary insights & hypotheses. The final report comprises captioned visualizations that convey key insights gained during the analysis.
+***Individual Project***
+
+The goal of individual project is to identify a dataset of interest and perform an exploratory analysis to better understand the shape and structure of the data, investigate initial questions, and develop preliminary insights & hypotheses. The final report comprises captioned visualizations that convey key insights gained during the analysis.
 
 In the individual project, the dataset I chose is from the following link: https://www.kaggle.com/datasets/shilongzhuang/pizza-sales.
 And the tool I used to answer the business problems I found from the dataset were **python (matplotlib)** and **Tableau**.
