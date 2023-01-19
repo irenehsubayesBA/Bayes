@@ -23,7 +23,7 @@ The goal of individual project (case study) is to develop a restructuring strate
 
 1. Data pre processing: including data cleaning and data transformation.
 2. Developed logistics regression model to predict the probability of employees accepting an RCC if it is offered to them.
-3. Developed CAR model to categorized employees who may accept RCCs or may not accept RCCs
-4. Performed PCA to reduce the number of variables of the data set and 
+3. Developed CAR model to categorized employees who may accept RCCs or may not accept RCCs.
+4. Performed PCA to reduce the number of variables of the data set.
 
 ```DTVC_individual report.pdf```:
