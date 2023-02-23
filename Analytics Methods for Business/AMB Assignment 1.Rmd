@@ -1,0 +1,275 @@
+---
+title: "SMM634 - Individual Assignment"
+author: "Irene Hsu"
+date: "2022-10-29"
+output: pdf_document
+---
+```{r}
+wine <-read.table(file = "wine.txt",header = TRUE)
+wine
+```
+A.Testing the assumptions of linear regression
+
+```{r}
+# test normality of the data in "price"
+library(ggpubr)
+
+ggdensity(wine$price, 
+          main = "Density plot of prcie",
+          xlab = "price")
+
+ggqqplot(wine$price, main = "Normal Q-Q plot (price)",
+         xlab = "price")
+
+shapiro.test(wine$price)
+```
+
+```{r}
+# test normality of the data in "price^(1/3)"
+ggdensity(wine$price^(1/3), 
+          main = "Density plot of prcie",
+          xlab = "price")
+
+ggqqplot(wine$price^(1/3), main = "Normal Q-Q plot (price)",
+         xlab = "price")
+
+shapiro.test(wine$price^(1/3))
+```
+
+
+```{r}
+# test normality of the data in "parker"
+ggdensity(wine$parker, main = "Density plot of parker",xlab = "parker")
+
+ggqqplot(wine$parker, main = "Normal Q-Q plot (parker)",
+         xlab = "parker")
+
+shapiro.test(wine$parker)
+```
+
+```{r}
+# test normality of the data in "h.rain"
+ggdensity(wine$h.rain, main = "Density plot of h.rain",xlab = "h.rain")
+
+ggqqplot(wine$h.rain, main = "Normal Q-Q plot (h.rain)",
+         xlab = "h.rain")
+
+shapiro.test(wine$h.rain)
+```
+
+```{r}
+# test normality of the data in "s.temp"
+ggdensity(wine$s.temp, main = "Density plot of s.temp",xlab = "s.temp")
+
+ggqqplot(wine$s.temp, main = "Normal Q-Q plot (s.temp)",
+         xlab = "s.temp")
+
+shapiro.test(wine$s.temp)
+
+## According to the result of Shapiro-Wilk normality test, p-value is larger than 0.05 which means that the null hypothesis can not be rejected and the data is normally distributed.
+```
+
+```{r}
+# test normality of the data in "w.rain"
+ggdensity(wine$w.rain, main = "Density plot of w.rain",xlab = "w.rain")
+
+ggqqplot(wine$w.rain, main = "Normal Q-Q plot (w.rain)",
+         xlab = "w.rain")
+
+shapiro.test(wine$w.rain)
+
+## According to the result of Shapiro-Wilk normality test, p-value is larger than 0.05 which means that the null hypothesis can not be rejected and the data is normally distributed.
+```
+
+```{r}
+# test normality of the data in "h.temp"
+ggdensity(wine$h.temp, main = "Density plot of h.temp",xlab = "h.temp")
+
+ggqqplot(wine$h.temp, main = "Normal Q-Q plot (h.temp)",
+         xlab = "h.temp")
+
+shapiro.test(wine$h.temp)
+
+## According to the result of Shapiro-Wilk normality test, p-value is larger than 0.05 which means that the null hypothesis can not be rejected and the data is normally distributed.
+```
+
+```{r}
+# test normality of all variables with histogram
+hist(wine$price)
+hist(wine$year)
+hist(wine$h.rain)
+hist(wine$s.temp)
+hist(wine$w.rain)
+hist(wine$h.temp)
+hist(wine$parker)
+```
+
+B. Missing data handling
+
+```{r}
+# deal with missing value_1
+imputed_Data <- mice(wine, m=7, maxit = 70, 
+                     method = 'pmm', seed = 500)
+```
+
+```{r}
+# deal with missing value_2
+completeData <- complete(imputed_Data,2)
+```
+
+C. Testing the assumptions of linear regression (after predicting missing values)
+
+```{r}
+# check normality of the data in "price"
+ggdensity(completeData$price, main = "Density plot of price",xlab = "price")
+
+ggqqplot(completeData$price, main = "Normal Q-Q plot (price)",
+         xlab = "price")
+
+shapiro.test(completeData$price)
+```
+
+```{r}
+# test linearity
+par(mfrow = c(2, 3))
+plot(completeData$price ~ completeData$year, data=wine)
+plot(completeData$price ~ completeData$h.rain, data=wine)
+plot(completeData$price ~ completeData$s.temp, data=wine)
+plot(completeData$price ~ completeData$w.rain, data=wine)
+plot(completeData$price ~ completeData$h.temp, data=wine)
+plot(completeData$price ~ completeData$parker, data=wine)
+```
+
+```{r}
+# Check correlation between all variables
+pairs(completeData)
+res <- cor(completeData)
+round(res, 3)
+```
+
+D. Run regression model (before transforming the data)
+
+```{r}
+# run regression (all variables) 1
+completewinelm <- lm(price ~ year + h.rain + s.temp + w.rain + 
+                       h.temp + parker, data = completeData)
+
+summary(completewinelm)
+
+## We can see that "h.rain" does not have a significant p-value (0.21567), and "h.temp" have an insignificant p-value (0.05471).
+```
+
+```{r}
+# run regression (without "h.rain" which has the largest p-value) 2
+D <- lm(price ~ year + s.temp + w.rain + 
+                       h.temp + parker, data = completeData)
+
+summary(D)
+```
+
+```{r}
+# run regression (remove h.rain & parker) 3
+E <- lm(price ~ year + s.temp + w.rain + 
+                       h.temp, data = completeData)
+
+summary(E)
+```
+
+```{r}
+par(mfrow = c(2, 2))
+plot(E)
+```
+
+E. Run regression model (after transforming the data)
+
+```{r}
+# run regression of all variables
+
+pricefixA <- lm(price^(1/3) ~ year + h.rain + s.temp + 
+                  w.rain + h.temp + parker, data = 
+                  completeData)
+
+summary(pricefixA)
+```
+
+```{r}
+# run regression (without "h.temp" which has the largest p-value) 2
+
+pricefixB <- lm(price^(1/3) ~ year + h.rain + s.temp + 
+                  w.rain + parker, data = completeData)
+
+summary(pricefixB)
+```
+
+```{r}
+# run regression (without "w.rain" which has the largest p-value) 3
+
+pricefixC <- lm(price^(1/3) ~ year + h.rain + s.temp + 
+                  parker, data = completeData)
+
+summary(pricefixC)
+```
+
+```{r}
+# run regression (without "h.rain" which has the largest p-value) 3
+
+pricefixC_2 <- lm(price^(1/3) ~ year + w.rain + 
+                    s.temp + parker, data = 
+                    completeData)
+
+summary(pricefixC_2)
+```
+
+```{r}
+#anova1
+intercept <- lm(price^(1/3) ~ 1, data = completeData)
+a <- lm(price^(1/3) ~ h.rain, data = completeData)
+anova(intercept,a)
+```
+
+```{r}
+#anova2
+b <- lm(price^(1/3) ~ h.rain + s.temp, data = completeData)
+anova(a,b)
+```
+
+```{r}
+#anova3
+c <- lm(price^(1/3) ~ h.rain + s.temp + w.rain, data = completeData)
+anova(b,c)
+```
+
+```{r}
+#anova4
+d <- lm(price^(1/3) ~ h.rain + s.temp + h.temp, data = completeData)
+anova(b,d)
+```
+
+```{r}
+#anova5
+e <- lm(price^(1/3) ~ h.rain + s.temp + parker, data = completeData)
+anova(b,e)
+```
+
+```{r}
+#anova6
+f <- lm(price^(1/3) ~ h.rain + s.temp + parker + year, data = completeData)
+anova(e,f)
+```
+
+```{r}
+par(mfrow = c(2, 2))
+plot(f)
+```
+
+```{r}
+# detecting multicollinearity
+car::vif(f)
+```
+
+```{r}
+# detect heteroscedasticity
+lmtest::bptest(f)
+car::ncvTest(f)
+```
+
